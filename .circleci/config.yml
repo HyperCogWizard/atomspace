@@ -3,14 +3,14 @@ version: 2.0
 jobs:
   atomspace:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           PGHOST: opencog-postgres
           PGUSER: opencog_test
           PGPASSWORD: cheese
           CCACHE_DIR: /ws/ccache
-      - image: $CIRCLE_PROJECT_USERNAME/postgres
+      - image: opencog/postgres
         name: opencog-postgres
     working_directory: /ws/atomspace
     steps:
@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Install CogUtil
           command: |
-            git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/cogutil /ws/cogutil
+            git clone --depth 1 https://github.com/opencog/cogutil /ws/cogutil
             mkdir -p /ws/cogutil/build
             cd /ws/cogutil/build && cmake .. && make -j2 && make -j2 install
             ldconfig
@@ -80,7 +80,7 @@ jobs:
 
   atomspace-rocks:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -96,7 +96,7 @@ jobs:
           command: cd /ws/atomspace/build && make -j2 install && ldconfig
       - run:
           name: Checkout AtomSpaceRocks
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/atomspace-rocks .
+          command: git clone --depth 1 https://github.com/opencog/atomspace-rocks .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -125,7 +125,7 @@ jobs:
 
   cogserver:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -144,7 +144,7 @@ jobs:
           command: cd /ws/atomspace/build && make install && ldconfig
       - run:
           name: Checkout CogServer
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/cogserver .
+          command: git clone --depth 1 https://github.com/opencog/cogserver .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -176,7 +176,7 @@ jobs:
 
   spacetime:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -192,7 +192,7 @@ jobs:
           command: cd /ws/atomspace/build && make -j2 install && ldconfig
       - run:
           name: Checkout SpaceTime
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/spacetime .
+          command: git clone --depth 1 https://github.com/opencog/spacetime .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -221,7 +221,7 @@ jobs:
 
   unify:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -237,7 +237,7 @@ jobs:
           command: cd /ws/atomspace/build && make -j2 install && ldconfig
       - run:
           name: Checkout Unify
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/unify .
+          command: git clone --depth 1 https://github.com/opencog/unify .
       - run:
           name: CMake Configunify
           command: mkdir build && cd build && cmake ..
@@ -266,7 +266,7 @@ jobs:
 
   ure:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -285,7 +285,7 @@ jobs:
           command: cd /ws/unify/build && make -j2 install && ldconfig
       - run:
           name: Checkout URE
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/ure .
+          command: git clone --depth 1 https://github.com/opencog/ure .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -314,7 +314,7 @@ jobs:
 
   as-moses:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -339,7 +339,7 @@ jobs:
           command: cd /ws/ure/build && make -j2 install && ldconfig
       - run:
           name: Checkout AS-MOSES
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/as-moses .
+          command: git clone --depth 1 https://github.com/opencog/as-moses .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -370,7 +370,7 @@ jobs:
 
   miner:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -400,7 +400,7 @@ jobs:
           command: cd /ws/ure/build && make -j2 install && ldconfig
       - run:
           name: Checkout Miner
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/miner .
+          command: git clone --depth 1 https://github.com/opencog/miner .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -428,7 +428,7 @@ jobs:
 
   pln:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -453,7 +453,7 @@ jobs:
           command: cd /ws/spacetime/build && make -j2 install && ldconfig
       - run:
           name: Checkout PLN
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/pln .
+          command: git clone --depth 1 https://github.com/opencog/pln .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -482,7 +482,7 @@ jobs:
 
   attention:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -504,7 +504,7 @@ jobs:
           command: cd /ws/cogserver/build && make install && ldconfig
       - run:
           name: Checkout Attention
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/attention .
+          command: git clone --depth 1 https://github.com/opencog/attention .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -532,7 +532,7 @@ jobs:
 
   opencog:
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
         environment:
           CCACHE_DIR: /ws/ccache
@@ -569,13 +569,13 @@ jobs:
       - run:
           name: Install Link Grammar Atomese
           command: |
-            git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/lg-atomese /ws/lg-atomese
+            git clone --depth 1 https://github.com/opencog/lg-atomese /ws/lg-atomese
             mkdir -p /ws/lg-atomese/build
             cd /ws/lg-atomese/build && cmake .. && make -j2 && make -j2 install
             ldconfig
       - run:
           name: Checkout OpenCog
-          command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/opencog .
+          command: git clone --depth 1 https://github.com/opencog/opencog .
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -605,7 +605,7 @@ jobs:
 
   package: #Place holder
     docker:
-      - image: $CIRCLE_PROJECT_USERNAME/opencog-deps
+      - image: opencog/opencog-deps
         user: root
     working_directory: /ws/atomspace
     steps:
